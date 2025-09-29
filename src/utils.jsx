@@ -1,3 +1,3 @@
-const baseURL = "http://localhost:1337/docs";
+const baseURL = "https://jsramverk-editor-aduj22-kamhaal-bhd8etffe2cmf4c0.northeurope-01.azurewebsites.net/docs";
 
 export default baseURL;

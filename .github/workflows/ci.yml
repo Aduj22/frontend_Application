@@ -2,9 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature/update-ui" ]
   pull_request:
     branches: [ "main" ]
+
 
 jobs:
   build-and-test:

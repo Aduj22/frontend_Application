@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
     margin: 2rem;
-    background-color: #f8f9fa;
+    min-height: 100vh;
   }
   
   /* h1, h2 {
     color: #333;
   } */
-  
+
   ul {
     list-style: none;
     padding: 0;
@@ -30,23 +30,140 @@ body {
   form {
     display: flex;
     flex-direction: column;
-    max-width: 400px;
   }
   
   input, textarea {
     margin-bottom: 1rem;
     padding: 0.5rem;
+    border-radius: 5px;
+  }
+
+  label {
+    color: #000;
   }
   
   button {
-    background: #7e7c03;
     color: white;
     border: none;
     padding: 0.5rem;
     cursor: pointer;
+    background: #525252;
+    border-radius: 5px;
+    transition: 0.2s;
   }
   
   button:hover {
-    background: #b1ae1c;
+    background: #000;
   }
   
+  .login-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 80vh;
+    max-width: 30%;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .signup-message {
+    color: rgb(190, 0, 0);
+  }
+
+  .view-doc {
+    max-width: 80%;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
+
+  .view-doc input, textarea{
+    border: 1px solid;
+    background-color: #eee;
+  }
+
+  .view-doc .update-doc-button {
+    background: #525252;
+    width: 30%;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .view-doc .update-doc-button:hover {
+    background-color: #000;
+  }
+
+  .document-text {
+    min-height: 60vh;
+  }
+
+  #share-button, #close-share-button {
+    width: 30%;
+    margin: 0 auto 10px;
+  }
+
+  .icons-list {
+    display: flex;
+    justify-content: end;
+  }
+
+  .share-font {
+    border: none;
+    cursor: pointer;
+  }
+
+  .email-section-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .email-section-overlay.show {
+    display: flex;
+  }
+  
+  .email-section-overlay.hide {
+    display: none;
+  }
+  
+  
+  #share-email-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  #share-email-section h2 {
+    margin: 0 0 10px;
+  }
+
+  #share-email-section input {
+    width: 95%;
+    padding: 0.5rem;
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 5px;
+  }
+
+  .share-buttons button {
+    width: 50%;
+    margin: 0.5rem auto;
+    color: #eee;
+    padding: 0.7rem;
+  }

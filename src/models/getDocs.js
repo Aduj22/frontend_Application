@@ -3,7 +3,10 @@ import baseURL from "../utils.jsx";
 const docsModel = {
     getDocs: async function getDocs() {
         try {
-            const response = await fetch(baseURL);
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${baseURL}/docs`, {
+                headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` }
+            });
             if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
             }
@@ -17,7 +20,29 @@ const docsModel = {
 
     getDoc: async function getDoc(id) {
         try {
-            const response = await fetch(`${baseURL}/${id}`);
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${baseURL}/docs/${id}`, {
+                headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` }
+            });
+            if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+            }
+        
+            const result = await response.json();
+            return result
+        } catch (error) {
+            console.error(error.message);
+        }
+    },
+
+    shareDoc: async function shareDoc(id, email) {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await fetch(`${baseURL}/docs/${id}/share`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json", "Authorization" : `Bearer ${token}` },
+                body: JSON.stringify({ userEmail: email }),
+            });
             if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
             }

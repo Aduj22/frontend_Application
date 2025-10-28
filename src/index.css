@@ -97,7 +97,10 @@ body {
   }
 
   .document-text {
-    min-height: 60vh;
+    min-height: 100px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    
   }
 
   #share-button, #close-share-button {
@@ -167,3 +170,51 @@ body {
     color: #eee;
     padding: 0.7rem;
   }
+
+
+
+
+
+.comment-font {
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+
+/* Comment Modal */
+.comment-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.comment-modal {
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  width: 300px;
+  max-width: 90vw;
+}
+
+.comment-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+

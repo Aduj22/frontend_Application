@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./views/Home.jsx";
 import View_doc from "./views/View_doc.jsx";
 import Add_doc from "./views/Add_doc.jsx";
@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename="/frontend_Application">
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/docs" element={<Home />}></Route>
@@ -18,7 +18,7 @@ function App() {
           <Route path="/account/login" element={< Login />}></Route>
           <Route path="/account/signup" element={< Register />}></Route>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </>
   )
 }

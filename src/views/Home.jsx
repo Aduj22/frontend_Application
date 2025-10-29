@@ -8,7 +8,7 @@ function Home() {
 
     async function fetchDocs() {
         const result = await docsModel.getDocs()
-        if (!result) {
+        if (!result || result.error) {
             setShouldRedirect(true)
         }
         else {

@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom"
 import docsModel from "../models/getDocs.js"
 import baseURL from "../utils.jsx";
 import { io } from "socket.io-client";
+import { jwtDecode } from "jwt-decode";
 
 function View_doc (){
   const [doc, setDoc] = useState({name: "", content: ""})
@@ -41,7 +42,10 @@ function View_doc (){
     const socket = io(baseURL);
     socketRef.current = socket;
 
-    socket.emit("joinDoc", id);
+    socket.on("connect", () => {
+      socket.emit("joinDoc", id);
+      console.log("Joined doc room:", id);
+    });
 
     socket.on("doc:update", (newContent) => {
       setDoc((doc) => ({ ...doc, content: newContent }));
@@ -124,14 +128,37 @@ function View_doc (){
     if (newComment.trim() && selectedLine !== null) {
       const result = await docsModel.addComment(id, selectedLine, newComment);
       if (result) {
+        setComments(prev => [...prev, result]);
         setNewComment("");
         setIsCommentModalOpen(false);
+
+        if (socketRef.current) {
+          socketRef.current.emit("comment:add", result);
+        }
       }
     }
   };
 
+  const token = localStorage.getItem("token");
+  let currentUserEmail = null;
+  if (token) {
+    try {
+      const decoded = jwtDecode(token);
+      currentUserEmail = decoded.email;
+    } catch (err) {
+      console.error("Invalid token", err);
+    }
+  }
+
   const handleDeleteComment = async (commentId) => {
-    await docsModel.deleteComment(id, commentId);
+    const result = await docsModel.deleteComment(id, commentId);
+    if (result) {
+      setComments(prev => prev.filter(comment => comment._id !== commentId));
+
+      if (socketRef.current) {
+        socketRef.current.emit("comment:delete", { docId: id, commentId });
+      }
+    }
   };
 
   return(
@@ -192,16 +219,18 @@ function View_doc (){
               {getCommentsForLine(selectedLine).map(comment => (
                 <div key={comment._id} className="comment-item">
                   <div className="comment-header">
-                    <strong>{comment.author}</strong>
+                    <strong className="comment-author">{comment.author}</strong>
                     <span className="comment-date">
                       {new Date(comment.createdAt).toLocaleString('sv-SE')}
                     </span>
-                    <button 
-                      className="delete-comment"
-                      onClick={() => handleDeleteComment(comment._id)}
-                    >
-                      ×
-                    </button>
+                    {comment.author === currentUserEmail && (
+                      <button 
+                        className="delete-comment"
+                        onClick={() => handleDeleteComment(comment._id)}
+                      >
+                        ×
+                      </button>
+                    )}
                   </div>
                   <div className="comment-content">{comment.content}</div>
                 </div>
@@ -214,6 +243,7 @@ function View_doc (){
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Skriv din kommentar..."
                 rows="3"
+                
               />
               <div className="comment-buttons">
                 <button type="button" onClick={handleAddComment}>Lägg till kommentar</button>

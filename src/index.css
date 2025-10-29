@@ -181,7 +181,7 @@ body {
 }
 
 
-/* Comment Modal */
+/* Comment Model */
 .comment-modal-overlay {
   position: fixed;
   top: 0;
@@ -199,7 +199,7 @@ body {
   background: white;
   border-radius: 8px;
   padding: 10px;
-  width: 300px;
+  width: 500px;
   max-width: 90vw;
 }
 
@@ -210,7 +210,28 @@ body {
   margin-bottom: 15px;
 }
 
+.comment-buttons {
+  display: flex;
+  gap: 10px;
+}
 
+.comment-author {
+  display: block;
+  width: 100%;
+}
+
+.comment-date {
+  margin-right: 5px;
+}
+
+.comment-content {
+  margin-bottom: 10px;
+}
+
+.comment-form textarea{
+  margin-top: 20px;
+  width: 90%;
+}
 
 
 

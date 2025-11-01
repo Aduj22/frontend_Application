@@ -1,6 +1,6 @@
 ## Backend
 
-- [Azure App Service - Docs API] https://jsramverk-editor-aduj22-kamhaal-bhd8etffe2cmf4c0.northeurope-01.azurewebsites.net/docs
+- [Azure App Service - Docs API] https://projekt-jsramverk-htc4ehhndbczetep.swedencentral-01.azurewebsites.net/docs
 
 ## Frontend
 
